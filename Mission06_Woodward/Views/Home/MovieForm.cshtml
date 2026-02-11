@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Mission06_Woodward.Models.Movie
+
+<h2>Add a Movie</h2>
+
+<form asp-action="MovieForm" method="post">
+
+    <input asp-for="Category" placeholder="Category" required />
+    <input asp-for="Title" placeholder="Title" required />
+    <input asp-for="Year" placeholder="Year" required />
+    <input asp-for="Director" placeholder="Director" required />
+
+    <label>Rating</label>
+    <select asp-for="Rating" required>
+        <option value="">Select Rating</option>
+        <option>G</option>
+        <option>PG</option>
+        <option>PG-13</option>
+        <option>R</option>
+    </select>
+
+    <label>Edited?</label>
+    <select asp-for="Edited">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+    </select>
+
+    <input asp-for="LentTo" placeholder="Lent To (optional)" />
+    <input asp-for="Notes" placeholder="Notes (25 char max)" maxlength="25" />
+
+    <button type="submit">Submit</button>
+
+</form>
