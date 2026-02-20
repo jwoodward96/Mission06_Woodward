@@ -1,37 +1,65 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model Mission06_Woodward.Models.Movie
+﻿@model Mission06_Woodward.Models.Movie
 
-<h2>Add a Movie</h2>
+<h2 class="mb-4">Add / Edit Movie</h2>
 
-<form asp-action="MovieForm" method="post">
+<form asp-action="MovieForm" method="post" class="container">
 
-    <input asp-for="Category" placeholder="Category" required />
-    <input asp-for="Title" placeholder="Title" required />
-    <input asp-for="Year" placeholder="Year" required />
-    <input asp-for="Director" placeholder="Director" required />
+    @if (Model != null && Model.MovieId != 0)
+    {
+        <input type="hidden" asp-for="MovieId" />
+    }
 
-    <label>Rating</label>
-    <select asp-for="Rating" required>
-        <option value="">Select Rating</option>
-        <option>G</option>
-        <option>PG</option>
-        <option>PG-13</option>
-        <option>R</option>
-    </select>
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
-    <label>Edited?</label>
-    <select asp-for="Edited">
-        <option value="false">No</option>
-        <option value="true">Yes</option>
-    </select>
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
 
-    <input asp-for="LentTo" placeholder="Lent To (optional)" />
-    <input asp-for="Notes" placeholder="Notes (25 char max)" maxlength="25" />
+    <div class="mb-3">
+        <label class="form-label">Year</label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
 
-    <button type="submit">Submit</button>
+    <div class="mb-3">
+        <label class="form-label">Director</label>
+        <input asp-for="Director" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Rating</label>
+        <input asp-for="Rating" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Edited?</label>
+        <select asp-for="Edited" class="form-select">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Copied To Plex?</label>
+        <select asp-for="CopiedToPlex" class="form-select">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Lent To</label>
+        <input asp-for="LentTo" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Notes</label>
+        <input asp-for="Notes" maxlength="25" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="MovieList" class="btn btn-secondary ms-2">Cancel</a>
 
 </form>

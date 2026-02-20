@@ -6,8 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// ✅ Use connection string from appsettings.json
 builder.Services.AddDbContext<MovieContext>(options =>
-    options.UseSqlite("Data Source=MovieCollection.sqlite"));
+    options.UseSqlite(builder.Configuration.GetConnectionString("MovieConnection")));
 
 var app = builder.Build();
 
@@ -20,7 +21,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// ✅ THIS LINE IS REQUIRED FOR IMAGES
+// Required for images, css, bootstrap, etc.
 app.UseStaticFiles();
 
 app.UseRouting();
